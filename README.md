@@ -30,3 +30,42 @@ In the financial sector, accurately detecting fraudulent transactions is crucial
 - **Scikit-learn**
 - **XGBoost**
 - **Imbalanced-learn**
+
+# Fraud Detection System for Banking Transactions
+
+## Project Overview
+This system detects potentially fraudulent financial transactions using machine learning techniques. It analyzes patterns in synthetic payment data from the Banksim dataset, which simulates real-world customer transactions across different time periods and payment amounts.
+
+## Detailed Features
+1. **Anomaly Detection**
+   - Implements Isolation Forest algorithm to identify unusual transactions
+   - Uses Local Outlier Factor for spatial clustering of suspicious activities
+   - Custom thresholding for fraud probability scores
+
+2. **Transaction Analysis**
+   - Time-based features: Frequency of transactions per hour/day
+   - Amount analysis: Deviation from typical transaction amounts
+   - Location patterns: Unusual geographic transaction sequences
+
+3. **Visual Analytics**
+   - Interactive dashboards showing fraud hotspots
+   - Time-series visualization of suspicious activity
+   - Alert system for operations teams
+
+## Implementation Details
+```python
+# Core detection algorithm
+from sklearn.ensemble import IsolationForest
+
+# Configure model with banking-specific parameters
+fraud_model = IsolationForest(
+    n_estimators=150,
+    contamination=0.02,  # Expected fraud rate
+    random_state=42
+)
+
+# Train on historical transaction data
+fraud_model.fit(training_data)
+
+# Generate predictions
+risk_scores = fraud_model.decision_function(new_transactions)
